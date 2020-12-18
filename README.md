@@ -97,11 +97,11 @@ Das Beispiel frägt den Taster vom Button ab.
     */
     #include "mbed.h"
 
-    DigitalIn button1( MBED_CONF_IOTKIT_BUTTON1, PullUp );
-    DigitalOut led1( MBED_CONF_IOTKIT_LED2 );
+    DigitalIn button1( BUTTON1 );
+    DigitalOut led1( LED2 );
 
     // Wartezeit
-    #define WAIT_TIME    100   
+    #define WAIT_TIME    1000   
 
     int main()
     {
