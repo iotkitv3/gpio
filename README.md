@@ -117,3 +117,58 @@ Das Beispiel frägt den Taster vom Button ab.
         }
     }
 </p></details>
+
+## AnalogIn
+***
+
+> [⇧ **Nach oben**](#gpio)
+
+![](../images/AnalogIn.png)
+
+Sinnbildliche Darstellung eines Analogen Signals
+- - -
+
+Ein Analogsignal ist ein Signals mit stufenlosem und unterbrechungsfreiem Verlauf
+
+In der Elektronik erfolgt die Umsetzung eines elektrischen Analogsignals in ein nutzbares Digitalsignal mittels Analog-Digital-Umsetzern (ADU), die umgekehrte Richtung erfolgt mittels Digital-Analog-Umsetzern (DAU).
+
+Die Pins A0 - A5 haben integrierte Analog-Digital-Umsetzer. AnalogIn macht sich das zunutze und liefert die aktuelle analoge Spannung in Prozent (0.0 - 1.0) oder als short (0 - 65535).
+
+### Anwendungen
+
+*   Auslesen eines Sensorwertes, z.B. Lichtintensität
+*   Zusammen mit einen [Potentiometer](http://de.wikipedia.org/wiki/Potentiometer) um einen Schwellenwert für ein Ereignis, z.B. für das Anschalten des Lichtes, oder um die Geschwindigkeit für einen Motor einzustellen.
+
+**Siehe auch:** [mbed Handbook](https://os.mbed.com/docs/mbed-os/latest/apis/analogin.html) und [YouTube Tutorial](https://www.youtube.com/watch?v=LLXJ3KE1XZw)
+
+### Beispiel(e)
+
+Das Beispiel frägt den Hallsensor (zur Ermittelung des Nord- oder Südpols eines Magneten) ab und bringt bei entsprechendem Pol die LED 1 zum leuchten.
+
+<details><summary>main.cpp</summary>  
+
+    /** Liest die analoge Spannung an einem Pin.
+        Hier das Poti an A0
+    */
+    #include <mbed.h>
+
+    AnalogIn hallSensor( A3 );
+    DigitalOut led1( LED1 );
+
+    // Wartezeit
+    #define WAIT_TIME    1000      
+
+    int main()
+    {
+        while   ( 1 )
+        {
+            printf("Hall %f\n", hallSensor.read() );
+            if  ( hallSensor.read() < 0.5f )          // in Prozent
+                led1 = 1;
+            else
+                led1 = 0;
+                
+            thread_sleep_for( WAIT_TIME );
+        }     
+    }
+</p></details>
