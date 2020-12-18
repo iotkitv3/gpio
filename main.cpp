@@ -7,8 +7,8 @@ DigitalOut led2( LED2 );
 DigitalOut led3( LED3 );
 DigitalOut led4( LED4 );
 
-// Blinking rate in milliseconds
-#define BLINKING_RATE     500ms
+// Wartezeit
+#define WAIT_TIME     500
 
 int main()
 {
@@ -19,26 +19,26 @@ int main()
         led2 = 0;
         led3 = 0;
         led4 = 0; 
-        ThisThread::sleep_for(BLINKING_RATE);
+        thread_sleep_for( WAIT_TIME );
         
         // Aufruf der Methode
         led1.write( 0 );
         led2.write( 1 );
         led3.write( 0 );
         led4.write( 0 ); 
-        ThisThread::sleep_for(BLINKING_RATE);
+        thread_sleep_for( WAIT_TIME );
         
         led1 = 0;
         led2 = 0;
         led3 = 1;
         led4 = 0; 
-        ThisThread::sleep_for(BLINKING_RATE);
+        thread_sleep_for( WAIT_TIME );
         
         led1 = 0;
         led2 = 0;
         led3 = 0;
         led4 = 1; 
-        ThisThread::sleep_for(BLINKING_RATE);        
+        thread_sleep_for( WAIT_TIME );        
                 
     }
 }  

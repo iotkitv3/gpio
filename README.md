@@ -26,7 +26,7 @@ Daneben sind  Pin mit Ground (**GND**) und +5 Volt (**+5V**) vorhanden um die Ve
 
 > [⇧ **Nach oben**](#gpio)
 
-![](../images/DigitalOut.png)
+![](images/DigitalOut.png)
 
 Sinnbildliche Darstellung für den Anschluss eines LEDs. Der Name des Pins ist entsprechend Anzupassen.
 
@@ -69,7 +69,7 @@ Das Beispiel [DigitalOut](main.cpp) steuert die LEDs 1 - 4 nacheinnander an.
 
 > [⇧ **Nach oben**](#gpio)
 
-![](../images/DigitalIn.png)
+![](images/DigitalIn.png)
 
 Schematische Darstellung: Anschluss eines Buttons
 - - -
@@ -92,6 +92,7 @@ Damit Eindeutig zwischen 0 und 1 unterschieden werden kann, wird in der Regel mi
 Das Beispiel frägt den Taster vom Button ab.
 
 <details><summary>main.cpp</summary>  
+
     /** DigitalIn liest den Status eines Pins aus.
     */
     #include "mbed.h"
@@ -99,7 +100,8 @@ Das Beispiel frägt den Taster vom Button ab.
     DigitalIn button1( MBED_CONF_IOTKIT_BUTTON1, PullUp );
     DigitalOut led1( MBED_CONF_IOTKIT_LED2 );
 
-    #define BLINKING_RATE     1000ms    
+    // Wartezeit
+    #define WAIT_TIME    100   
 
     int main()
     {
@@ -109,7 +111,7 @@ Das Beispiel frägt den Taster vom Button ab.
             if  ( button1 == 0 ) 
             {
                 led1 = 1;
-                ThisThread::sleep_for(BLINKING_RATE);
+                thread_sleep_for( WAIT_TIME );
             }
 
         }
