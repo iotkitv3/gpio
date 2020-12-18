@@ -2,7 +2,7 @@ GPIO
 ----
 ***
 
-> [⇧ **Home**](../intro/README.md)
+> [⇧ **Home**](https://github.com/iotkitv4/intro)
 
 Allzweckeingabe/-ausgabe (engl. GPIO - General Purpose Input/Output) ist ein allgemeiner Kontaktstift (Pin) an einem Mikrocontroller, dessen Verhalten, unabhängig, ob als Eingabe- oder Ausgabekontakt, durch logische Programmierung frei bestimmbar ist. GPIO-Kontakten ist kein Zweck vorgegeben, sie sind daher standardmäßig unbelegt.
 
@@ -62,4 +62,56 @@ Siehe auch: [mbed Handbook](https://os.mbed.com/docs/mbed-os/latest/apis/digital
 
 ### Beispiel(e)
 
-Das Beispiel [DigitalOut](DigitalOut/src/main.cpp) steuert die LEDs D10 - D13 nacheinnander an.
+Das Beispiel [DigitalOut](main.cpp) steuert die LEDs 1 - 4 nacheinnander an.
+
+## DigitalIn
+***
+
+> [⇧ **Nach oben**](#gpio)
+
+![](../images/DigitalIn.png)
+
+Schematische Darstellung: Anschluss eines Buttons
+- - -
+
+DigitalIn liest den Status eines Pins (als Input Bezeichnet) aus.
+
+DigitalIn liefert je nach Spannung: 0 Volt eine 0 oder 3.3 - 5 Volt eine 1.
+
+Damit Eindeutig zwischen 0 und 1 unterschieden werden kann, wird in der Regel mit PullUp Widerständen gearbeitet. Dies kann durch den internen PullUp Widerstand (zweiter Parameter bei DigitalIn, Default = ON).
+
+### Anwendungen 
+
+*   Externer Feedback, z.B. Taster.
+*   Sensoren welche bei Eintreten eines Ereignisses zwischen 0 und 1 umschalten, z.B. Bewegungsmelder
+
+**Siehe auch:** [mbed Handbook](https://os.mbed.com/docs/mbed-os/latest/apis/digitalin.html) und [YouTube Tutorial](https://www.youtube.com/watch?v=XmWqP8laxxk)
+
+### Beispiel(e)
+
+Das Beispiel frägt den Taster vom Button ab.
+
+<details><summary>main.cpp</summary>  
+    /** DigitalIn liest den Status eines Pins aus.
+    */
+    #include "mbed.h"
+
+    DigitalIn button1( MBED_CONF_IOTKIT_BUTTON1, PullUp );
+    DigitalOut led1( MBED_CONF_IOTKIT_LED2 );
+
+    #define BLINKING_RATE     1000ms    
+
+    int main()
+    {
+        while   ( 1 ) 
+        {
+            led1 = 0;
+            if  ( button1 == 0 ) 
+            {
+                led1 = 1;
+                ThisThread::sleep_for(BLINKING_RATE);
+            }
+
+        }
+    }
+</p></details>
