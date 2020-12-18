@@ -123,7 +123,7 @@ Das Beispiel frägt den Taster vom Button ab.
 
 > [⇧ **Nach oben**](#gpio)
 
-![](../images/AnalogIn.png)
+![](images/AnalogIn.png)
 
 Sinnbildliche Darstellung eines Analogen Signals
 - - -
@@ -170,5 +170,81 @@ Das Beispiel frägt den Hallsensor (zur Ermittelung des Nord- oder Südpols eine
                 
             thread_sleep_for( WAIT_TIME );
         }     
+    }
+</p></details>
+
+## PwmOut - Pulsweitenmodulation
+***
+
+> [⇧ **Nach oben**](#gpio)
+
+![](images/PWMOut.png)
+
+Sinnbildliche Darstellung eines PWM Signals
+
+- - -
+
+[Pulsweitenmodulation](http://de.wikipedia.org/wiki/Pulsweitenmodulation) (kurz PWM), ist eine Modulationsart, bei der die elektrische Spannung zwischen Ground (0 Volt) und 3.3 Volt wechselt.
+
+Die relative Länge des Pulses wird Tastgrad (englisch duty cycle) genannt.
+
+Der Abstand zwischen dem Startpunkt zwei aufeinanderfolgender Pulse wird "Periode" genannt.
+
+PwmOut kann nur mit Pins verwendet werden, welche mit PWM bezeichnet sind.
+
+### Anwendungen 
+
+*   Licht dimmen
+*   Motoren Geschwindigkeit regeln
+*   Töne erzeugen
+
+Siehe auch: [mbed Handbook](https://os.mbed.com/docs/mbed-os/latest/apis/pwmout.html) und [YouTube Tutorial](https://www.youtube.com/watch?v=J5lsM1k-r-g&list=PLWy-YwxbAu8FDpD2saP1p6IFHgvbzODyc&index=3)
+
+### Beispiel(e)
+
+Das Beispiel PWMOut dimmt die LED 4 langsam auf.
+
+<details><summary>main.cpp</summary>  
+
+    /** Pulsweitenmodulation
+    */
+    #include "mbed.h"
+
+    PwmOut led( LED4 );
+
+    int main()
+    {
+        for ( float i  = 0.0; i < 1.0f; i += 0.01f )
+        {
+            led = i;
+            thread_sleep_for ( 100 );
+        }
+    }
+</p></details>
+
+
+Das Beispiel PwmOutPeriod (nur IoTKitV3 Shield) emuliert eine Polizeisierene mit dem Buzzer (Summer).
+
+
+<details><summary>main.cpp</summary>  
+
+    /** Pulsweitenmodulation - Generieren eines x Hz Tones mittels PWM
+    *  Dip Switch SW4 aktivieren (nach oben)
+    */
+    #include "mbed.h"
+
+    PwmOut speaker( D12 );
+
+    int main()
+    {
+        while   ( 1 ) 
+        {
+            // Polizei Sirene
+            speaker.period( 1.0 / 3969.0 );      // 3969 = Tonfrequenz in Hz
+            speaker = 0.5f;
+            thread_sleep_for ( 500 );
+            speaker.period( 1.0 / 2800.0 );
+            thread_sleep_for ( 500 );
+        }
     }
 </p></details>
