@@ -26,7 +26,7 @@ Daneben sind  Pin mit Ground (**GND**) und +5 Volt (**+5V**) vorhanden um die Ve
 
 > [⇧ **Nach oben**](#gpio)
 
-![](images/DigitalOut.png)
+![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/DigitalOut.png)
 
 Sinnbildliche Darstellung für den Anschluss eines LEDs. Der Name des Pins ist entsprechend Anzupassen.
 
@@ -69,7 +69,7 @@ Das Beispiel [DigitalOut](main.cpp) steuert die LEDs 1 - 4 nacheinnander an.
 
 > [⇧ **Nach oben**](#gpio)
 
-![](images/DigitalIn.png)
+![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/DigitalIn.png)
 
 Schematische Darstellung: Anschluss eines Buttons
 - - -
@@ -123,7 +123,7 @@ Das Beispiel frägt den Taster vom Button ab.
 
 > [⇧ **Nach oben**](#gpio)
 
-![](images/AnalogIn.png)
+![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/AnalogIn.png)
 
 Sinnbildliche Darstellung eines Analogen Signals
 - - -
@@ -178,7 +178,7 @@ Das Beispiel frägt den Hallsensor (zur Ermittelung des Nord- oder Südpols eine
 
 > [⇧ **Nach oben**](#gpio)
 
-![](images/PWMOut.png)
+![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/PWMOut.png)
 
 Sinnbildliche Darstellung eines PWM Signals
 
@@ -262,7 +262,7 @@ Ein Encoder Switch - zählt die Impulse am Encoder und schaltet einen Zähler vo
 
 ### Beispiel(e)
 
-* Das Beispiel EncoderSwitch (nur IoTKitV3 Board) gibt die Anzahl Pulse auf dem Display aus.
+* Das Beispiel EncoderSwitch (nur IoTKitV3 K64F) gibt die Anzahl Pulse auf dem Display aus.
 
 <details><summary>main.cpp</summary>  
 
