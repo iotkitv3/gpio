@@ -384,7 +384,7 @@ Erstellt eine Array welche die 4 LED anhand einer Pseudo Melodie aufleuchten lä
 
 ### Adaptieren bestehender Beispiele - Melodie abspielen
 
-BBaut das [Using a Speaker for Audio Output Beispiel](https://os.mbed.com/users/4180_1/notebook/using-a-speaker-for-audio-output/) auf den Summer um.
+Baut das [Using a Speaker for Audio Output Beispiel](https://os.mbed.com/users/4180_1/notebook/using-a-speaker-for-audio-output/) auf den Summer um.
 
 * Anwendung: Türglocke, Alarmanlage, Polizeihorn. 
 
