@@ -248,3 +248,206 @@ Das Beispiel PwmOutPeriod (nur IoTKitV3 Shield) emuliert eine Polizeisierene mit
         }
     }
 </p></details>
+
+## Encoder Switch
+***
+
+> [⇧ **Nach oben**](#gpio)
+
+Ein Encoder Switch - zählt die Impulse am Encoder und schaltet einen Zähler vor und zurück
+
+### Anwendungen
+
+* Wert hoch- und runterzählen, z.B. um einen Motor zu Steuern, eine Lautstärke einzustellen etc.
+
+### Beispiel(e)
+
+* Das Beispiel EncoderSwitch (nur IoTKitV3 Board) gibt die Anzahl Pulse auf dem Display aus.
+
+<details><summary>main.cpp</summary>  
+
+    /** EncoderSwitch - zaehlt die Impulse am Encoder und schalter Zaehler vor und zurueck
+    */
+    #include "mbed.h"
+    #include "QEI.h"
+    #include "OLEDDisplay.h"
+
+    OLEDDisplay oled( MBED_CONF_IOTKIT_OLED_RST, MBED_CONF_IOTKIT_OLED_SDA, MBED_CONF_IOTKIT_OLED_SCL );
+
+    //Use X4 encoding.
+    //QEI wheel(p29, p30, NC, 624, QEI::X4_ENCODING);
+    //Use X2 encoding by default.
+    QEI wheel (MBED_CONF_IOTKIT_BUTTON2, MBED_CONF_IOTKIT_BUTTON3, NC, 624);
+    
+    int main() 
+    {
+        int value, old = 0;
+        oled.clear();
+        oled.printf( "Encoder Test\n" );
+    
+        while(1)
+        {
+            oled.cursor( 1, 0 );
+            value = wheel.getPulses(); 
+            if  ( value != old )
+                oled.printf("Pulses: %6i\n", value );
+            old = value;
+            thread_sleep_for( 100 );
+        }
+    }
+</p></details>
+
+## Übungen
+***
+
+> [⇧ **Nach oben**](#gpio)
+
+### DigitalIn, DigitalOut, if, wait
+
+Schreibt ein Programm welches eine der vier LED's bei Druck einer Taste 3 lang Sekunden aufleuchten lässt.
+
+* Anwendung: Licht Treppenhaus.
+
+<details><summary>Lösung</summary>  
+
+    /** 1. LED x Sekunden aufleuchten bei Tastendruck (if, wait)
+    */
+    
+    #include "mbed.h"
+    
+    DigitalIn   button1( MBED_CONF_IOTKIT_BUTTON1 );        // User Button
+    DigitalOut  led( MBED_CONF_IOTKIT_LED1 );     			// 1. LED
+    
+    int main()
+    {
+        while ( true ) 
+        {
+            if  ( button1 == 0 )        // Button gedrueckt
+            {
+                led = 1;
+                thread_sleep_for ( 3000 );
+                led = 0;
+            }
+        }
+    }
+</p></details>
+
+
+### DigitalOut, for Verschachtelt, wait, Array's
+
+Erstellt eine Array welche die 4 LED anhand einer Pseudo Melodie aufleuchten lässt.
+
+* Anwendung: Fernseher Simulation um Einbrecher abzuschrecken.
+
+<details><summary>Lösung</summary> 
+
+    /** 4.4 Melodie visualisieren (for Verschachtelt, wait, Array's)
+    */
+    #include "mbed.h"
+
+    DigitalOut led[] =  { DigitalOut( MBED_CONF_IOTKIT_LED1 ), DigitalOut( MBED_CONF_IOTKIT_LED2 ), DigitalOut( MBED_CONF_IOTKIT_LED3 ), DigitalOut( MBED_CONF_IOTKIT_LED4 ) };
+
+    int m[15][4] = {
+                    { 1, 0, 0, 1 },
+                    { 1, 1, 1, 1 },
+                    { 1, 1, 0, 0 },
+                    { 0, 1, 0, 1 },
+                    { 1, 1, 1, 1 },
+                    { 1, 1, 0, 1 },
+                    { 1, 0, 0, 1 },
+                    { 1, 1, 0, 1 },
+                    { 1, 0, 1, 1 },
+                    { 0, 0, 0, 1 },
+                    { 1, 0, 0, 1 },
+                    { 1, 1, 0, 0 },
+                    { 1, 0, 0, 1 },
+                    { 1, 0, 0, 1 },
+                    { 1, 0, 0, 1 }
+                };
+                    
+
+    int main()
+    {
+        while (true) 
+        {
+            // row
+            for ( int r = 0; r < 14; r++ )
+            {
+                // column
+                for ( int c = 0; c < 4; c++ )
+                    led[c] = m[r] [c];
+                thread_sleep_for( 200 );
+            }
+        }
+    }
+</p></details>
+
+### Adaptieren bestehender Beispiele - Melodie abspielen
+
+BBaut das [Using a Speaker for Audio Output Beispiel](https://os.mbed.com/users/4180_1/notebook/using-a-speaker-for-audio-output/) auf den Summer um.
+
+* Anwendung: Türglocke, Alarmanlage, Polizeihorn. 
+
+<details><summary>Lösung</summary>  
+
+    /** 4.5 Melodie abspielen
+    */
+    #include "mbed.h"
+
+    // speaker sound effect demo using PWM hardware output
+    PwmOut speaker( MBED_CONF_IOTKIT_BUZZER );
+
+    int main()
+    {
+        int i;
+        // generate a 500Hz tone using PWM hardware output
+        speaker.period(1.0/500.0); // 500hz period
+        speaker =0.5; //50% duty cycle - max volume
+        thread_sleep_for(3000);
+        speaker=0.0; // turn off audio
+        thread_sleep_for(2000);
+
+        // generate a short 150Hz tone using PWM hardware output
+        // something like this can be used for a button click effect for feedback
+        for (i=0; i<10; i++) 
+        {
+            speaker.period(1.0/150.0); // 500hz period
+            speaker =0.25; //25% duty cycle - mid range volume
+            thread_sleep_for( 20 );
+            speaker=0.0; // turn off audio
+            thread_sleep_for( 500 );
+        }
+
+        // sweep up in frequency by changing the PWM period
+        for (i=0; i<8000; i=i+100) 
+        {
+            speaker.period(1.0/float(i));
+            speaker=0.25;
+            thread_sleep_for( 100 );
+        }
+        thread_sleep_for( 2000 );
+
+        // two tone police siren effect -  two periods or two frequencies
+        // increase volume - by changing the PWM duty cycle
+        for (i=0; i<26; i=i+2) 
+        {
+            speaker.period(1.0/969.0);
+            speaker = float(i)/50.0;
+            thread_sleep_for( 500 );
+            speaker.period(1.0/800.0);
+            thread_sleep_for( 500 );
+        }
+        // decrease volume
+        for (i=25; i>=0; i=i-2) 
+        {
+            speaker.period(1.0/969.0);
+            speaker = float(i)/50.0;
+            thread_sleep_for( 500 );
+            speaker.period(1.0/800.0);
+            thread_sleep_for( 500 );
+        }
+        speaker =0.0;
+        thread_sleep_for( 2000 );
+    }
+</p></details>
+
