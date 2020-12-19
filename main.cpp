@@ -2,10 +2,10 @@
 */
 #include "mbed.h"
 
-DigitalOut led1( LED1 );
-DigitalOut led2( LED2 );
-DigitalOut led3( LED3 );
-DigitalOut led4( LED4 );
+DigitalOut led1( MBED_CONF_IOTKIT_LED1 );
+DigitalOut led2( MBED_CONF_IOTKIT_LED2 );
+DigitalOut led3( MBED_CONF_IOTKIT_LED3 );
+DigitalOut led4( MBED_CONF_IOTKIT_LED4 );
 
 // Wartezeit
 #define WAIT_TIME     500
