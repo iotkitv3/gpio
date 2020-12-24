@@ -2,7 +2,7 @@ GPIO
 ----
 ***
 
-> [⇧ **Home**](https://github.com/iotkitv4/intro)
+> [⇧ **Home**](https://github.com/iotkitv3/intro)
 
 Allzweckeingabe/-ausgabe (engl. GPIO - General Purpose Input/Output) ist ein allgemeiner Kontaktstift (Pin) an einem Mikrocontroller, dessen Verhalten, unabhängig, ob als Eingabe- oder Ausgabekontakt, durch logische Programmierung frei bestimmbar ist. GPIO-Kontakten ist kein Zweck vorgegeben, sie sind daher standardmäßig unbelegt.
 
@@ -26,7 +26,7 @@ Daneben sind  Pin mit Ground (**GND**) und +5 Volt (**+5V**) vorhanden um die Ve
 
 > [⇧ **Nach oben**](#gpio)
 
-![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/DigitalOut.png)
+![](https://raw.githubusercontent.com/iotkitv3/intro/main/images/DigitalOut.png)
 
 Sinnbildliche Darstellung für den Anschluss eines LEDs. Der Name des Pins ist entsprechend Anzupassen.
 
@@ -69,7 +69,7 @@ Das Beispiel [DigitalOut](main.cpp) steuert die LEDs 1 - 4 nacheinnander an.
 
 > [⇧ **Nach oben**](#gpio)
 
-![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/DigitalIn.png)
+![](https://raw.githubusercontent.com/iotkitv3/intro/main/images/DigitalIn.png)
 
 Schematische Darstellung: Anschluss eines Buttons
 - - -
@@ -123,7 +123,7 @@ Das Beispiel frägt den Taster vom Button ab.
 
 > [⇧ **Nach oben**](#gpio)
 
-![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/AnalogIn.png)
+![](https://raw.githubusercontent.com/iotkitv3/intro/main/images/AnalogIn.png)
 
 Sinnbildliche Darstellung eines Analogen Signals
 - - -
@@ -178,7 +178,7 @@ Das Beispiel frägt den Hallsensor (zur Ermittelung des Nord- oder Südpols eine
 
 > [⇧ **Nach oben**](#gpio)
 
-![](https://raw.githubusercontent.com/iotkitv4/intro/main/images/PWMOut.png)
+![](https://raw.githubusercontent.com/iotkitv3/intro/main/images/PWMOut.png)
 
 Sinnbildliche Darstellung eines PWM Signals
 
